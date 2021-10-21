@@ -1,0 +1,55 @@
+@import './reset.scss';
+
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: calc(100vmax / 1920 * 100);
+  font-family: 'Quicksand', sans-serif;
+  background-color: $main-bg;
+}
+
+.logo {
+  font-family: 'Gamja Flower', cursive;
+}
+
+.btn {
+  padding: 0.15rem 0.3rem;
+  border-radius: 0.3rem;
+  display: inline-block;
+  color: #fff;
+  background-color: $primary-color;
+  font-weight: bold;
+  box-shadow: 5px 5px 0 $secondary-color;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:active {
+    transform: translate(0.05rem, 0.05rem);
+  }
+}
+
+// reset input
+$range-size: 0.3rem;
+input[type='range'] {
+  appearance: none;
+  // overflow: hidden;
+  outline: none;
+  background: none;
+  border-radius: 5px;
+  background-color: $secondary-color;
+  height: 0.1rem;
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: $range-size;
+    height: $range-size;
+    border-radius: 50%;
+    background-color: $primary-color;
+  }
+  &::-moz-range-thumb {
+    border: 0;
+    width: $range-size;
+    height: $range-size;
+    border-radius: 50%;
+    background-color: $primary-color;
+  }
+}
