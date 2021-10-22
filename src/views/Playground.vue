@@ -19,10 +19,13 @@ export default {
   computed: {
     ...mapState('Image', ['uploadImg']),
   },
+  mounted() {
+    window.scrollTo(0, 0);
+  },
 };
 </script>
 <style lang="scss">
 .playground {
-  padding: 0.5rem 0 1.5rem;
+  padding: 0.3rem 0 1.2rem;
 }
 </style>

@@ -17,12 +17,12 @@
       ></div>
     </div>
     <div class="btn-box">
-      <input type="color" id="color" @input="onSelectColor" />
+      <input type="color" id="color" @input="onSelectColor" :value="bgColor" />
       <label for="color" class="btn">
         select background
       </label>
       <div class="check-wrapper" @click="isTransparent = !isTransparent">
-        <span class="checkbox" :class="{ checked: isTransparent }"></span>
+        <span class="switcher" :class="{ active: isTransparent }"></span>
         transparent
       </div>
     </div>
@@ -35,7 +35,7 @@ export default {
   name: 'Result',
   data() {
     return {
-      bgColor: '#fff',
+      bgColor: '#ffffff',
       isTransparent: true,
     };
   },
@@ -84,19 +84,32 @@ export default {
     margin-left: 0.3rem;
     font-weight: bold;
     cursor: pointer;
-    .checkbox {
+    .switcher {
       position: relative;
-      width: 0.3rem;
-      height: 0.3rem;
+      width: 0.5rem;
+      height: 0.1rem;
       margin-right: 0.1rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 2px solid;
-      border-radius: 50%;
-      &.checked:before {
-        content: '\2713';
-        font-size: 0.3rem;
+      border-radius: 0.2rem;
+      background-color: #fff;
+      transition: all 0.2s;
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0.2rem;
+        height: 0.2rem;
+        border-radius: 50%;
+        background-color: $secondary-color;
+        transition: all 0.2s;
+      }
+      &.active {
+        background-color: $secondary-color;
+        &:before {
+          left: calc(100% - 0.2rem);
+          background-color: $primary-color;
+        }
       }
     }
   }

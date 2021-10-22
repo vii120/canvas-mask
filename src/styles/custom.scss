@@ -4,9 +4,12 @@
   box-sizing: border-box;
 }
 html {
-  font-size: calc(100vmax / 1600 * 100);
+  font-size: calc(100vmax / 1920 * 100);
   font-family: 'Quicksand', sans-serif;
   background-color: $main-bg;
+  @include mobileWidth {
+    font-size: 50px;
+  }
 }
 
 .logo {

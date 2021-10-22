@@ -48,7 +48,7 @@ export default {
 </script>
 <style lang="scss">
 .tool-wrapper {
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;

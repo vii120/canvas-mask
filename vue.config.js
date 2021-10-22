@@ -3,7 +3,7 @@ module.exports = {
   pages: {
     index: {
       entry: 'src/main.js',
-      title: 'hello canvas',
+      title: 'Canvas Mask | crop picture with what you paint',
     },
   },
   css: {

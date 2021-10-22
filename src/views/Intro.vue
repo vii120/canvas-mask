@@ -10,7 +10,7 @@
       />
       <img src="../assets/demo-result.png" alt="result" class="demo-colored" />
       <div class="title-box">
-        <h1 class="logo">picanvas</h1>
+        <h1 class="logo">Canvas Mask</h1>
         <h2>crop picture with what you paint!</h2>
         <router-link to="/playground" class="btn start-btn">
           try it!
@@ -51,6 +51,7 @@ export default {
     img {
       display: block;
       width: 25%;
+      min-height: 4rem;
       transition: all 0.5s;
       opacity: 0.7;
       box-shadow: 0 0 0.3rem rgba(#000, 0.3);
@@ -90,9 +91,9 @@ export default {
     }
   }
   h1 {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: bold;
-    letter-spacing: 0.15rem;
+    letter-spacing: 0.1rem;
     color: $primary-color;
     text-shadow: 5px 5px #fff;
   }
