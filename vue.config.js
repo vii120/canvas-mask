@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/lala/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/canvas-mask/' : '/',
   pages: {
     index: {
       entry: 'src/main.js',
