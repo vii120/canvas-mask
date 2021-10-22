@@ -1,12 +1,13 @@
 <template>
   <nav>
     <router-link to="/" class="logo">Canvas Mask</router-link>
-    <router-link to="/">Home</router-link>
-    <router-link to="/playground">Playground</router-link>
+    <router-link class="page-link" to="/">Home</router-link>
+    <router-link class="page-link" to="/playground">Playground</router-link>
     <a
       href="https://github.com/vii120/canvas-mask"
       target="_blank"
       rel="noopener"
+      class="github-link"
     >
       Github
     </a>
@@ -33,7 +34,33 @@ nav {
   }
   a {
     padding: 0.1rem;
-    padding-right: 0.3rem;
+    padding-bottom: 0.05rem;
+    margin-bottom: 0.05rem;
+    margin-right: 0.3rem;
+  }
+  .page-link {
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 0;
+      height: 0.05rem;
+      border-radius: 0.2rem;
+      background-color: $primary-color;
+      transition: all 0.2s;
+    }
+    &:hover,
+    &.router-link-exact-active {
+      &:before {
+        width: 100%;
+      }
+    }
+  }
+  .github-link {
+    border: 1px solid;
+    border-radius: 0.3rem;
   }
 }
 </style>

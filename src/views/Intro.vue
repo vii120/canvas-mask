@@ -38,7 +38,6 @@ export default {
     &:hover {
       img {
         filter: brightness(0.7);
-        transform: scale(0.9);
         opacity: 0.4;
         &:hover {
           filter: none;

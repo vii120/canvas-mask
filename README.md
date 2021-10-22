@@ -1,4 +1,4 @@
-# grid-draw
+# canvas-mask
 
 ## Project setup
 
