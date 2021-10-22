@@ -35,21 +35,18 @@ const actions = {
     commit(UPDATE_USER_IMAGE, null);
   },
   getUploadSize({ commit }, { width, height }) {
-    const limit = 800;
-    const isLandscape = width / height > 1;
+    const limitHeight = window.innerHeight * 0.9;
+    const limitWidth = window.innerWidth * 0.9;
     let adjustWidth = width;
     let adjustHeight = height;
     // exceed size if image is too large
-    if (Math.max(width, height) > limit) {
-      if (isLandscape) {
-        // landscape
-        adjustWidth = limit;
-        adjustHeight = (limit * height) / width;
-      } else {
-        // portrait
-        adjustWidth = (limit * width) / height;
-        adjustHeight = limit;
-      }
+    if (adjustWidth > limitWidth) {
+      adjustWidth = limitWidth;
+      adjustHeight = (limitWidth * height) / width;
+    }
+    if (adjustHeight > limitHeight) {
+      adjustHeight = limitHeight;
+      adjustWidth = (limitHeight * width) / height;
     }
     commit(SET_IMAGE_SIZE, { width: adjustWidth, height: adjustHeight });
   },

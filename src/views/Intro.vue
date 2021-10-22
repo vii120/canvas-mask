@@ -32,6 +32,7 @@ export default {
   .demo-box {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     padding-bottom: 0.8rem;
     z-index: -1;
     &:hover {
@@ -54,6 +55,10 @@ export default {
       opacity: 0.7;
       box-shadow: 0 0 0.3rem rgba(#000, 0.3);
       cursor: crosshair;
+      @include mobileWidth {
+        width: 50%;
+        box-shadow: none;
+      }
     }
   }
   .title-box {
@@ -73,13 +78,23 @@ export default {
       background-image: linear-gradient(to bottom, transparent, $main-bg);
       z-index: -1;
     }
+
+    @include mobileWidth {
+      bottom: 50%;
+      transform: translateY(50%);
+      padding-bottom: 0.5rem;
+      &:before {
+        background-image: none;
+        background-color: rgba(#fff, 0.5);
+      }
+    }
   }
   h1 {
     font-size: 1.2rem;
     font-weight: bold;
     letter-spacing: 0.15rem;
-    color: #fff;
-    text-shadow: 5px 5px $primary-color;
+    color: $primary-color;
+    text-shadow: 5px 5px #fff;
   }
   h2 {
     font-size: 0.3rem;

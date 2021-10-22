@@ -12,6 +12,9 @@
     ></div>
     <canvas
       ref="canvas"
+      @touchstart="onDrawStart"
+      @touchmove="onDrawing"
+      @touchend="onDrawEnd"
       @mousedown="onDrawStart"
       @mousemove="onDrawing"
       @mouseup="onDrawEnd"
@@ -28,7 +31,7 @@
       }"
     ></div>
     <div class="reupload-btn" @click="resetUploadImg">
-      change another photo?
+      change another photo
     </div>
   </div>
 </template>
@@ -61,7 +64,16 @@ export default {
   },
   methods: {
     ...mapActions('Image', ['updateCanvasEl', 'resetUploadImg']),
-    clearCanvas() {
+    setTouchPosition(e) {
+      // touch event
+      if (e.offsetX === undefined) {
+        const rect = e.target.getBoundingClientRect();
+        this.currentX = e.targetTouches[0].clientX - rect.x;
+        this.currentY = e.targetTouches[0].clientY - rect.y;
+      }
+    },
+    clearCanvas(e) {
+      this.setTouchPosition(e);
       this.canvasCtx.clearRect(
         this.currentX,
         this.currentY,
@@ -69,14 +81,17 @@ export default {
         this.penSize
       );
     },
-    onDrawStart() {
+    onDrawStart(e) {
       if (this.isDrawing) return;
       this.isDrawing = true;
+      this.setTouchPosition(e);
     },
     onDrawing(e) {
+      e.preventDefault();
       // set mouse position
-      this.currentX = e.offsetX;
-      this.currentY = e.offsetY;
+      if (e.offsetX) {
+        [this.currentX, this.currentY] = [e.offsetX, e.offsetY];
+      }
       if (!this.isDrawing) return;
       // using eraser
       if (this.useEraser) {
@@ -84,16 +99,25 @@ export default {
         return;
       }
       // get next position
-      const nextX = e.offsetX;
-      const nextY = e.offsetY;
+      let nextX, nextY;
+      if (e.offsetX === undefined) {
+        // touch event
+        const rect = e.target.getBoundingClientRect();
+        nextX = e.targetTouches[0].clientX - rect.x;
+        nextY = e.targetTouches[0].clientY - rect.y;
+      } else {
+        // mouse event
+        nextX = e.offsetX;
+        nextY = e.offsetY;
+        [nextX, nextY] = [e.offsetX, e.offsetY];
+      }
       // draw
       this.canvasCtx.beginPath();
       this.canvasCtx.moveTo(this.currentX, this.currentY);
       this.canvasCtx.lineTo(nextX, nextY);
       this.canvasCtx.stroke();
       // update current position
-      this.currentX = nextX;
-      this.currentY = nextY;
+      [this.currentX, this.currentY] = [nextX, nextY];
     },
     onDrawEnd() {
       if (!this.isDrawing) return;
@@ -130,7 +154,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    @include bg-img;
+    @include bgImg;
   }
   canvas {
     display: block;
@@ -143,6 +167,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     margin: 0.1rem auto;
+    white-space: nowrap;
     cursor: pointer;
     border-bottom: 1px dashed;
   }

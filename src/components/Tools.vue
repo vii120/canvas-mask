@@ -1,6 +1,6 @@
 <template>
   <div class="tool-wrapper">
-    <div class="switch-btn" v-if="!displayOutput">
+    <div class="switch-btn tool-btn" v-if="!displayOutput">
       <div
         class="btn"
         :class="{ active: penType === el }"
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="range-box" v-if="!displayOutput">
-      <input type="range" v-model="pen" min="1" max="50" />
+      <input type="range" v-model="pen" min="5" max="50" />
       <div class="num">{{ penSize }}</div>
     </div>
     <div class="btn tool-btn" @click="resetCanvasEl" v-if="!displayOutput">
@@ -52,11 +52,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   .tool-btn {
     margin: 0 0.15rem;
   }
   .switch-btn {
-    margin-right: 0.5rem;
     display: flex;
     align-items: center;
     border-radius: 0.8rem;
@@ -77,11 +77,16 @@ export default {
     }
   }
   .range-box {
-    margin-right: 0.3rem;
+    margin: 0 0.3rem;
     display: flex;
     align-items: center;
     .num {
       width: 0.5rem;
+    }
+
+    @include mobileWidth {
+      order: 2;
+      margin-top: 0.5rem;
     }
   }
 }

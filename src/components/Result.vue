@@ -5,7 +5,7 @@
       :style="{
         width: `${imgWidth}px`,
         height: `${imgHeight}px`,
-        'background-color': useBgColor || 'transparent',
+        'background-color': isTransparent ? 'transparent' : bgColor,
       }"
     >
       <div
@@ -16,12 +16,15 @@
         }"
       ></div>
     </div>
-    <input type="color" id="color" @input="onSelectColor" />
-    <label for="color" class="btn">
-      select background
-    </label>
-    <div class="btn" @click="onSelectColor(null)">
-      transparent
+    <div class="btn-box">
+      <input type="color" id="color" @input="onSelectColor" />
+      <label for="color" class="btn">
+        select background
+      </label>
+      <div class="check-wrapper" @click="isTransparent = !isTransparent">
+        <span class="checkbox" :class="{ checked: isTransparent }"></span>
+        transparent
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +35,8 @@ export default {
   name: 'Result',
   data() {
     return {
-      useBgColor: null,
+      bgColor: '#fff',
+      isTransparent: true,
     };
   },
   computed: {
@@ -45,7 +49,8 @@ export default {
   },
   methods: {
     onSelectColor(e) {
-      this.useBgColor = e ? e.target.value : null;
+      this.bgColor = e.target.value;
+      this.isTransparent = false;
     },
   },
 };
@@ -59,17 +64,41 @@ export default {
   .result-img {
     width: 100%;
     height: 100%;
-    @include bg-img;
+    @include bgImg;
   }
   input[type='color'] {
     // display: none;
-    visibility: hidden;
     width: 0;
     height: 0;
     overflow: hidden;
   }
-  .btn {
-    margin: 0.2rem;
+  .btn-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.2rem;
+  }
+  .check-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 0.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    .checkbox {
+      position: relative;
+      width: 0.3rem;
+      height: 0.3rem;
+      margin-right: 0.1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid;
+      border-radius: 50%;
+      &.checked:before {
+        content: '\2713';
+        font-size: 0.3rem;
+      }
+    }
   }
 }
 </style>
