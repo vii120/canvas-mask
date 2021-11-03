@@ -87,7 +87,6 @@ export default {
       this.setTouchPosition(e);
     },
     onDrawing(e) {
-      e.preventDefault();
       // set mouse position
       if (e.offsetX) {
         [this.currentX, this.currentY] = [e.offsetX, e.offsetY];
@@ -160,6 +159,7 @@ export default {
     display: block;
     opacity: 0.7;
     cursor: none;
+    user-select: none;
   }
   .reupload-btn {
     position: absolute;
@@ -178,6 +178,7 @@ export default {
   top: 0;
   left: 0;
   pointer-events: none;
+  user-select: none;
   border-radius: 50%;
   background-color: rgba(#fff, 0.8);
   transform: translate(-50%, -50%);
