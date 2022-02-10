@@ -6,11 +6,8 @@ import Playground from '@/views/Playground.vue';
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
-  base:
-    process.env.NODE_ENV === 'production'
-      ? '/canvas-mask/'
-      : process.env.BASE_URL,
+  mode: 'hash',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -28,5 +25,6 @@ export default new Router({
       name: 'Playground',
       component: Playground,
     },
+    { path: '*', redirect: '/' },
   ],
 });
