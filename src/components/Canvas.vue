@@ -46,6 +46,7 @@ export default {
     return {
       canvasCtx: null,
       isDrawing: false,
+
       currentX: null,
       currentY: null,
     };
@@ -72,6 +73,11 @@ export default {
         this.currentY = e.targetTouches[0].clientY - rect.y;
       }
     },
+    setMousePosition(e) {
+      if (e.offsetX) {
+        [this.currentX, this.currentY] = [e.offsetX, e.offsetY];
+      }
+    },
     clearCanvas(e) {
       this.setTouchPosition(e);
       this.canvasCtx.clearRect(
@@ -85,13 +91,13 @@ export default {
       if (this.isDrawing) return;
       this.isDrawing = true;
       this.setTouchPosition(e);
+      this.setMousePosition(e);
     },
     onDrawing(e) {
-      // set mouse position
-      if (e.offsetX) {
-        [this.currentX, this.currentY] = [e.offsetX, e.offsetY];
+      if (!this.isDrawing) {
+        this.setMousePosition(e);
+        return;
       }
-      if (!this.isDrawing) return;
       // using eraser
       if (this.useEraser) {
         this.clearCanvas(e);
@@ -106,8 +112,6 @@ export default {
         nextY = e.targetTouches[0].clientY - rect.y;
       } else {
         // mouse event
-        nextX = e.offsetX;
-        nextY = e.offsetY;
         [nextX, nextY] = [e.offsetX, e.offsetY];
       }
       // draw

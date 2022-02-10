@@ -71,6 +71,8 @@ export default {
     width: 0;
     height: 0;
     overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
   }
   .btn-box {
     display: flex;
