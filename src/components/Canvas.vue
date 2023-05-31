@@ -80,6 +80,7 @@ export default {
     },
     clearCanvas(e) {
       this.setTouchPosition(e);
+      this.setMousePosition(e);
       this.canvasCtx.clearRect(
         this.currentX,
         this.currentY,
